@@ -1,0 +1,34 @@
+{
+  "name": "noguess",
+  "version": "1.0.0",
+  "description": "A website denpend on node and website\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D social website depend on node and  express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangwenyang/noguess.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "jiangwenyang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiangwenyang/noguess/issues"
+  },
+  "homepage": "https://github.com/jiangwenyang/noguess#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "colors": "^1.1.2",
+    "connect": "^2.30.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.4",
+    "session-mongoose": "^0.5.2",
+    "socket.io": "^1.7.3"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>无猜-注册</title>
+    <!-- Bootstrap -->
+    <link href="css/journal-bootstrap.min.css" rel="stylesheet">
+    <!-- datepicker -->
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <!-- 自定义CSS -->
+    <link href="css/main.css" rel="stylesheet">
+    <!-- 有字库 -->
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+</head>
+
+<body>
+    {{{body}}}
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript">
+        $youziku.load("h1,.description", "17e9903dd1fe49b594e29a1095c4e7df", "jin_mei_xiaottmeigz");
+        $youziku.draw();
+        $('#birthday').datetimepicker({
+            minView: 2,
+            format: 'yyyy-mm-dd',
+            language: "zh-CN",
+            autoclose: true
+        });
+    </script>
+</body>
+
+</html>

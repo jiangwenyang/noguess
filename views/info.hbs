@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1 class="text-center text-info">无猜</h1>
-            <p class="description text-center text-info">写下你的小秘密把它藏到树洞里吧~~</p>                
-            <form>
+            <p class="description text-center text-info">写下你的小秘密把它藏到树洞里吧~~</p>
+            <form action="/info" method="POST">
                 <div class="form-group">
                     <label for="gender">性别</label>
                     <select name="gender" id="gender" class="form-control">
-                        <option value ="volvo">男</option>
-                        <option value ="saab">女</option>
+                        <option value ="男">男</option>
+                        <option value ="女">女</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -17,6 +17,17 @@
                         <option value ="单身">单身</option>
                         <option value ="恋爱中">恋爱中</option>
                         <option value ="已婚">已婚</option>                            
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="education">教育程度</label>
+                    <select name="education" id="education" class="form-control">
+                        <option value ="初中">初中</option>
+                        <option value ="高中">高中</option>                           
+                        <option value ="专科">专科</option>                           
+                        <option value ="本科">本科</option>                           
+                        <option value ="硕士">硕士</option>
+                        <option value ="博士">博士</option>                                                                                                                                                                                    
                     </select>
                 </div>
                 <div class="form-group">

@@ -2,29 +2,25 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1 class="text-center text-info">无猜</h1>
-            <p class="description text-center text-info">这里有一群两小无猜的小伙伴！快来加入我们吧</p>
+            <p class="description text-center text-info">这里有一群两小无猜的小伙伴！</p>
             {{#if flash}}
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <p>{{flash.msg}}</p>
                 </div>
             {{/if}}
-            <form method="POST" action="reg">
-                <div class="form-group">
-                    <label for="nickname">昵称</label>
-                    <input type="text" class="form-control" name="nickname" id="nickname" placeholder="想别人怎么称呼你?">
-                </div>
+            <form method="POST" action="login">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="请填写你的电子邮件,将用于登录">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="请填写你的电子邮件">
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">注册</button>
+                <button type="submit" class="btn btn-primary btn-block">登录</button>
             </form>
-            <a href="/login" class="welcome-info">已经注册？点击登录</a>
+            <a href="/reg" class="welcome-info">还未注册？点击加入我们</a>
         </div>
     </div>
 </div>

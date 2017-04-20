@@ -4,26 +4,25 @@ var ObjectId=mongoose.Schema.Types.ObjectId;
 var Mixed=mongoose.Schema.Types.Mixed;
 var userSchema=new Schema({
     email:{type:String,unique:true,required:true},
-    password:String,
-    name:{type:String,required:true},
+    password:{type:String,required:true},
     nickname:{type:String,required:true},
-    gender:{type:String,required:true},
+    gender:{type:String,required:true,default:'undefined'},
     birthday:{
-        year:{type:Number,required:true},
-        month:{type:Number,required:true},
-        day:{type:Number,required:true}
+        year:{type:Number,required:true,default:0},
+        month:{type:Number,required:true,default:0},
+        day:{type:Number,required:true,default:0}
     },
-    site:{type:String,required:true},
-    height:{type:Number,required:true},
-    education:{type:String,required:true},
-    martial:{type:String,required:true},
+    site:{type:String,required:true,default:'undefined'},
+    height:{type:Number,required:true,default:0},
+    education:{type:String,required:true,default:'undefined'},
+    marital:{type:String,required:true,default:'undefined'},
     qa:{
-        q:{type:String,required:true},
-        a:{type:String,required:true}
+        q:{type:String,required:true,default:'undefined'},
+        a:{type:String,required:true,default:'undefined'}
     },
     avatar:{
-        assign:{type:Boolean,default:false},
-        path:{type:String,default:'baidu.com'},
+        isSetted:{type:Boolean,required:true,default:false},
+        path:{type:String,required:true,default:'baidu.com'},
     },
     album:[
         {

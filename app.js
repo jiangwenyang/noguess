@@ -63,14 +63,26 @@ app.use(function (req, res, next) {
     delete req.session.flash;
     next();
 });
-// 登录检测
+// 登录检测以及用户信息初始化
 app.use(function (req, res, next) {
-    if (req.url=='/reg'||req.url=='/login'||req.session.uid) {
-        next();
-    }else{
-        res.redirect('/login');
+    if (req.session.uid) {
+        // 配置用户信息显示在页面上
+        res.locals.uid = req.session.uid;
+        res.locals.email = req.session.email;
+        res.locals.nickname = req.session.nickname;
+        res.locals.avatar = req.session.avatar;
+        if (req.url != '/reg' && req.url != '/login') { //有session并且访问不是登录注册的页面
+            next();
+        } else {
+            res.redirect('/'); //有session访问登录注册，直接跳转回首页
+        }
+    } else {
+        if (req.url != '/reg' && req.url != '/login') { //没有session并且访问未授权页面
+            res.redirect('/login');
+        } else { //没有session访问授权页面
+            return next();
+        }
     }
-
 })
 // 访问用户模型
 var User = require('./models/users.js');

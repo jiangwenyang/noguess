@@ -21,4 +21,6 @@ module.exports = function (app) {
     app.get('/login',main.loginRender);
     // 进行登录
     app.post('/login',main.loginHandler);
+    // 注销登录
+    app.get('/logout',main.logoutHandler);
 };

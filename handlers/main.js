@@ -1,15 +1,15 @@
 var User = require('../models/users.js');
-// 主页渲染器
+// 主页渲染
 exports.homeRender = function (req, res) {
-    res.send('首页渲染');
+    res.render('home');
 };
-// 注册渲染器
+// 注册渲染
 exports.regRender = function (req, res) {
     res.render('reg', {
         layout: 'welcome',
     });
 };
-// 注册处理器
+// 注册处理
 exports.regHandler = function (req, res) {
     // 成功就跳转到资料填写页面
     var user = new User({
@@ -29,19 +29,21 @@ exports.regHandler = function (req, res) {
         } else {
             req.session.uid = doc.id;
             req.session.email = doc.email;
+            req.session.nickname = doc.nickname;
+            req.session.avatar = 'avatar.gif'; //设置默认头像
             res.redirect('/info');
             console.log('成功插入用户信息！！！' + '\nid:' + doc.id + '\nemail:' + doc.email);
         }
 
     });
 };
-// 资料填写渲染器
+// 资料填写渲染
 exports.infoRender = function (req, res) {
     res.render('info', {
         layout: 'welcome'
     });
 };
-// 资料处理器
+// 资料处理
 exports.infoHandler = function (req, res) {
     var fullTime = req.body.birthday.split('-');
     var update = {
@@ -65,13 +67,13 @@ exports.infoHandler = function (req, res) {
         }
     });
 };
-// 头像设置渲染器
+// 头像设置渲染
 exports.avatarRender = function (req, res) {
     res.render('avatar', {
         layout: 'welcome'
     });
 };
-// 头像设置处理器
+// 头像设置处理
 exports.avatarHandler = function (req, res) {
     var update = {
         avatar: {
@@ -88,13 +90,13 @@ exports.avatarHandler = function (req, res) {
         }
     });
 };
-// 登录渲染器
+// 登录渲染
 exports.loginRender = function (req, res) {
     res.render('login', {
         layout: 'welcome'
     });
 };
-// 登录处理器
+// 登录处理
 exports.loginHandler = function (req, res) {
     User.findOne({
         email: req.body.email
@@ -109,6 +111,12 @@ exports.loginHandler = function (req, res) {
         } else if (doc.password == req.body.password) {
             req.session.uid = doc.id;
             req.session.email = doc.email;
+            req.session.nickname = doc.nickname;
+            if(doc.avatar.isSetted){
+                req.session.avatar=doc.avatar.path;
+            }else{
+                req.session.avatar='avatar.gif';
+            }
             res.redirect('/');
         } else {
             req.session.flash = {
@@ -117,4 +125,12 @@ exports.loginHandler = function (req, res) {
             res.redirect('/login');
         }
     })
+};
+// 注销登录处理
+exports.logoutHandler = function (req, res) {
+    delete req.session.uid;
+    delete req.session.email;
+    delete req.session.nickname;
+    delete req.session.avatar; //设置默认头像
+    res.redirect('/login');
 };

@@ -41,7 +41,7 @@ var sessionStore = new MongoSessionStore({
 });
 // 托管静态文件
 app.use(express.static('public'));
-app.use(express.static('avatar'));
+app.use(express.static('uploads'));
 // 配置body-parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());

@@ -1,0 +1,116 @@
+<div class="jumbotron">
+    <h1>Q:{{q}}</h1>
+</div>
+<div class="profilePanel row">
+    <div class="profilePanel-left col-md-2">
+        <img src="{{avatar}}" class="profile-avatar-me img-responsive img-rounded" alt="Responsive image">
+    </div>
+    <div class="profilePanel-right col-md-10">
+        <div class="profilePanel-right-header">
+            <span class="profilePanel-right-nickname">{{nickname}}</span>
+        </div>
+        <div class="profilePanel-right-body">
+            <div class="profileItem clearfix">
+                <div class="profiledetailLabel">
+                    <span>邮箱</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{email}}</span>
+                </div>
+            </div>
+            <div class="profileItem clearfix">
+                <div class="profiledetailLabel">
+                    <span>生日</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{birthday}}</span>
+                </div>
+            </div>
+            <div class="profileItem clearfix">
+                <div class="profiledetailLabel">
+                    <span>性别</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{gender}}</span>
+                </div>
+            </div>
+            <div class="profileItem clearfix">
+                <div class="profiledetailLabel">
+                    <span>居住地</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{site}}</span>
+                </div>
+            </div>
+            <div class="profileItem clearfix">
+                <div class="profiledetailLabel">
+                    <span>身高</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{height}}</span>
+                </div>
+            </div>
+            <div class="profileItem clearfix">
+                <div class="profiledetailLabel">
+                    <span>教育程度</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{education}}</span>
+                </div>
+            </div>
+            <div class="profileItem">
+                <div class="profiledetailLabel">
+                    <span>婚姻状态</span>
+                </div>
+                <div class="profiledetailValue">
+                    <span>{{marital}}</span>
+                </div>
+            </div>
+            <button class="profileUpdateBtn btn btn-primary">编辑个人资料</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist" id="tabPanelList">
+                <li role="presentation" class="active"><a href="#dynamic" aria-controls="dynamic" role="tab" data-toggle="tab">动态</a></li>
+                <li role="presentation"><a href="#topic" aria-controls="topic" role="tab" data-toggle="tab">话题</a></li>
+                <li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">活动</a></li>
+                <li role="presentation"><a href="#following" aria-controls="following" role="tab" data-toggle="tab">我关注的</a></li>
+                <li role="presentation"><a href="#follwers" aria-controls="follwers" role="tab" data-toggle="tab">关注我的</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="dynamic">动态</div>
+                <div role="tabpanel" class="tab-pane" id="topic">话题</div>
+                <div role="tabpanel" class="tab-pane" id="activity">活动</div>
+                <div role="tabpanel" class="tab-pane" id="following">我关注的</div>
+                <div role="tabpanel" class="tab-pane" id="follwers">关注我的</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>我的猜果</p>
+                <p>50个</p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <p>关注了</p>
+                    <span>50</span>
+                </div>
+                <div class="col-md-6">
+                    <p>关注者</p>
+                    <span>50</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

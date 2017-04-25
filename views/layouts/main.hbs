@@ -41,18 +41,18 @@
                         <li><a href="#">话题</a></li>
                         <li><a href="#">活动</a></li>
                         <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">快速搜索<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">条件搜索</a></li> 
-                            <li role="separator" class="divider"></li>                           
-                            <li><a href="#">随机速配</a></li>
-                            <li><a href="#">同城搜索</a></li>
-                            <li><a href="#">星座速配</a></li>
-                        </ul>
-                    </li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">快速搜索<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">条件搜索</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">随机速配</a></li>
+                                <li><a href="#">同城搜索</a></li>
+                                <li><a href="#">星座速配</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><img id="avatar-me" src="{{avatar}}" class="img-responsive img-rounded" alt="Responsive image"></li>
+                        <li><img src="{{avatar}}" class="avatar-me img-responsive img-rounded" alt="Responsive image"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{nickname}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -71,8 +71,9 @@
         </nav>
         {{{body}}}
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/mainAjax.js"></script>
     <script type="text/javascript">
         $youziku.load("h1,.navbar-brand", "17e9903dd1fe49b594e29a1095c4e7df", "jin_mei_xiaottmeigz");
         $youziku.draw();

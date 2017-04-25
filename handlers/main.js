@@ -1,4 +1,5 @@
 var User = require('../models/users.js');
+var Topic = require('../models/topic.js');
 // 主页渲染
 exports.homeRender = function (req, res) {
     res.render('home');
@@ -63,7 +64,7 @@ exports.infoHandler = function (req, res) {
             console.log(err);
         } else {
             console.log(('填写注册资料成功').green);
-            res.redirect('/avatar');
+            res.redirect('/avatarSetting');
         }
     });
 };
@@ -78,14 +79,14 @@ exports.avatarHandler = function (req, res) {
     var update = {
         avatar: {
             isSetted: true,
-            path: req.file.filename
+            path: 'avatar/' + req.file.filename
         }
     }
     User.findByIdAndUpdate(req.session.uid, update, function (err, doc) {
         if (err) {
             console.log(err);
         } else {
-            req.session.avatar = req.file.filename;
+            req.session.avatar = 'avatar/' + req.file.filename;
             res.redirect('/');
         }
     });
@@ -112,10 +113,10 @@ exports.loginHandler = function (req, res) {
             req.session.uid = doc.id;
             req.session.email = doc.email;
             req.session.nickname = doc.nickname;
-            if(doc.avatar.isSetted){
-                req.session.avatar=doc.avatar.path;
-            }else{
-                req.session.avatar='avatar.gif';
+            if (doc.avatar.isSetted) {
+                req.session.avatar = doc.avatar.path;
+            } else {
+                req.session.avatar = 'avatar.gif';
             }
             res.redirect('/');
         } else {
@@ -134,3 +135,84 @@ exports.logoutHandler = function (req, res) {
     delete req.session.avatar; //设置默认头像
     res.redirect('/login');
 };
+// 发布个人动态处理
+exports.dynamicHandler = function (req, res) {
+    var dynamicItem = {
+        time: new Date(),
+        content: req.body.dynamicText,
+        imgPath: 'dynamic/' + req.file.filename
+    };
+    User.findById(req.session.uid, function (err, doc) {
+        if (err) {
+            console.log(err)
+        } else {
+            doc.dynamic.push(dynamicItem);
+            doc.save();
+            res.redirect('/');
+        }
+    });
+};
+// 发布话题
+exports.topicHandler = function (req, res) {
+    var topic = new Topic({
+        leader: req.session.uid,
+        time: new Date(),
+        content: req.body.topicText
+    });
+    topic.save(function (err, doc) {
+        if (err) {
+            console.log(err);
+        } else {
+            User.findByIdAndUpdate(req.session.uid, {
+                $push: {
+                    'topic.publish': topic._id
+                }
+            }, function (err, doc) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.redirect('/');
+                }
+            });
+        }
+    });
+}
+// 个人主页渲染
+exports.profileRender = function (req, res) {
+    User.findById(req.session.uid, function (err, doc) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('profile', {
+                email: doc.email,
+                gender: doc.gender,
+                birthday: doc.birthday.year + '/' + doc.birthday.month + '/' + doc.birthday.day,
+                site: doc.site,
+                height: doc.height + 'cm',
+                education: doc.education,
+                marital: doc.marital
+            });
+        }
+    })
+};
+// 个人主页标签页内容处理
+exports.prifileHandler = function (req, res) {
+    switch (req.params.tabType) {
+        case 'dynamic':
+            // 处理个人主页动态请求
+            User.findById(req.session.uid, function (err, doc) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json(doc.dynamic);
+                }
+            });
+            break;
+        case 'topic':
+            // 处理个人主页话题请求
+            User.findById(req.session.uid).populate('topic.publish', '_id time content').exec(function (err, doc) {
+                res.json(doc.topic.publish);
+            })
+            break;
+    }
+}

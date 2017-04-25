@@ -1,11 +1,70 @@
-.top-80{
+html,body{
+    min-height: 1200px;
+}
+.top-80 {
     margin-top: 80px;
 }
-.welcome-info{
+
+.welcome-info {
     display: inline-block;
     margin-top: 10px;
 }
-#avatar-me{
+
+.avatar-me {
+    margin-top: 5px;
     height: 48px;
     width: 48px;
+}
+
+.profilePanel {
+    padding: 10px 20px;
+    border: 1px solid #e7eaf1;
+    box-shadow: 0 1px 3px rgba(0, 37, 55, .05);
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-me {
+    position: absolute;
+    top: -40px;
+    width: 140px;
+    height: 140px;
+}
+
+.profilePanel-right-header {
+    margin-bottom: 10px;
+}
+
+.profilePanel-right-nickname {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 30px;
+    color: #000;
+}
+
+.profileItem {
+    margin: 5px 0;
+}
+
+.profiledetailLabel {
+    width: 100px;
+    float: left;
+}
+
+.profiledetailValue {
+    width: 100px;
+    margin-left: 40px;
+    float: left;
+}
+
+.profileUpdateBtn {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+}
+.box{
+    width: 100px;
+    height: 100px;
+    border: 1px soid red;
 }

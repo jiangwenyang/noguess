@@ -3,7 +3,21 @@
 <p>{{uid}}</p>
 <p>{{nickname}}</p>
 <p>{{avatar}}</p>
-
+<form action="/dynamic" method="post" class="form-inline" enctype="multipart/form-data">
+    <div class="form-group">
+        <textarea class="form-control" rows="3" id="dynamicText" name="dynamicText"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="file" name="dynamicImg" id="dynamicImg" class="form-control" placeholder="Text input">
+    </div>
+    <button type="submit" class="btn btn-default">发布新动态</button>
+</form>
+<form action="/topic" method="post" class="form-inline">
+    <div class="form-group">
+        <textarea class="form-control" rows="3" id="topicText" name="topicText"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">发布新话题</button>
+</form>
 <h2>最新动态-好友的最新的一条动态</h2>
 <ul>
     <li>
@@ -21,7 +35,7 @@
         <p>adasdadasdasdadadad</p>
         <p>adasdadasdasdadadad</p>
         <p>adasdadasdasdadadad</p>
-    </li> 
+    </li>
 </ul>
 <h2>热门活动-根据参加人数</h2>
 <ul>
@@ -40,7 +54,7 @@
         <p>adasdadasdasdadadad</p>
         <p>adasdadasdasdadadad</p>
         <p>adasdadasdasdadadad</p>
-    </li> 
+    </li>
 </ul>
 <h2>热门话题-评论人数</h2>
 <ul>
@@ -59,5 +73,5 @@
         <p>adasdadasdasdadadad</p>
         <p>adasdadasdasdadadad</p>
         <p>adasdadasdasdadadad</p>
-    </li> 
+    </li>
 </ul>

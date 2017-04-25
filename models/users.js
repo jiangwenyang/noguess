@@ -1,55 +1,126 @@
-var mongoose=require('mongoose');
-var Schema=mongoose.Schema;
-var ObjectId=mongoose.Schema.Types.ObjectId;
-var Mixed=mongoose.Schema.Types.Mixed;
-var userSchema=new Schema({
-    email:{type:String,unique:true,required:true},
-    password:{type:String,required:true},
-    nickname:{type:String,required:true},
-    gender:{type:String,required:true,default:'undefined'},
-    birthday:{
-        year:{type:Number,required:true,default:0},
-        month:{type:Number,required:true,default:0},
-        day:{type:Number,required:true,default:0}
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
+var Mixed = mongoose.Schema.Types.Mixed;
+var userSchema = new Schema({
+    email: {
+        type: String,
+        unique: true,
+        required: true
     },
-    site:{type:String,required:true,default:'undefined'},
-    height:{type:Number,required:true,default:0},
-    education:{type:String,required:true,default:'undefined'},
-    marital:{type:String,required:true,default:'undefined'},
-    qa:{
-        q:{type:String,required:true,default:'undefined'},
-        a:{type:String,required:true,default:'undefined'}
+    password: {
+        type: String,
+        required: true
     },
-    avatar:{
-        isSetted:{type:Boolean,required:true,default:false},
-        path:{type:String,required:true,default:'baidu.com'},
+    nickname: {
+        type: String,
+        required: true
     },
-    album:[
-        {
-            time:Date,
-            path:String
+    gender: {
+        type: String,
+        required: true,
+        default: 'undefined'
+    },
+    birthday: {
+        year: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        month: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        day: {
+            type: Number,
+            required: true,
+            default: 0
         }
-    ],
-    followers:[ObjectId],
-    following:[ObjectId],
-    dynamic:{
-        time:Date,
-        content:String,
-        imgPath:String
     },
-    mailbox:[{
-        from:ObjectId,
-        text:String
+    site: {
+        type: String,
+        required: true,
+        default: 'undefined'
+    },
+    height: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    education: {
+        type: String,
+        required: true,
+        default: 'undefined'
+    },
+    marital: {
+        type: String,
+        required: true,
+        default: 'undefined'
+    },
+    qa: {
+        q: {
+            type: String,
+            required: true,
+            default: 'undefined'
+        },
+        a: {
+            type: String,
+            required: true,
+            default: 'undefined'
+        }
+    },
+    avatar: {
+        isSetted: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        path: {
+            type: String,
+            required: true,
+            default: 'baidu.com'
+        },
+    },
+    album: [{
+        time: Date,
+        path: String
     }],
-    activity:{
-        organize:[{type:ObjectId,ref: 'activity'}],
-        join:[{type:ObjectId,ref: 'activity'}]
+    followers: [ObjectId],
+    following: [ObjectId],
+    dynamic: [{
+        time: Date,
+        content: String,
+        imgPath: String
+    }],
+    mailbox: [{
+        from: ObjectId,
+        text: String
+    }],
+    activity: {
+        organize: [{
+            type: ObjectId,
+            ref: 'Activity'
+        }],
+        join: [{
+            type: ObjectId,
+            ref: 'Activity'
+        }]
     },
-    topic:{
-        publsh:[{type:ObjectId,ref:'topic'}],
-        reply:[{type:ObjectId,ref:'topic'}]
+    topic: {
+        publish: [{
+            type: ObjectId,
+            ref: 'Topic'
+        }],
+        reply: [{
+            type: ObjectId,
+            ref: 'Topic'
+        }]
     },
-    fruit:{type:Number,default:0}
+    fruit: {
+        type: Number,
+        default: 0
+    }
 });
-var User=mongoose.model('User',userSchema);
-module.exports=User;
+var User = mongoose.model('User', userSchema);
+module.exports = User;

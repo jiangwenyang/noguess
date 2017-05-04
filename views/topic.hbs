@@ -7,7 +7,7 @@
     </div>
     <div class="topicFooter clearfix">
         <div class="topicItem-info pull-left">
-            <span class="glyphicon glyphicon-time"></span><span>{{timeStamp}}</span>
+            <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
         </div>
         <div class="topicItem-info pull-left">
             <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
@@ -23,7 +23,7 @@
         </p>
         <div class="repeatFooter clearfix">
             <div class="topicItem-info pull-left">
-                <span class="glyphicon glyphicon-time"></span><span>{{time}}</span>
+                <span class="glyphicon glyphicon-time"></span><span>{{formatDate time}}</span>
             </div>
             <div class="topicItem-info pull-left">
                 <span class="glyphicon glyphicon-user"></span><a href="/profile/{{from._id}}">{{from.nickname}}</a>

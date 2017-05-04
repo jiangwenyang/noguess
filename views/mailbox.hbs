@@ -1,3 +1,4 @@
+{{#if data.mailbox}}
 {{#each data.mailbox}}
 <div class="row mailItem clearfix">
     <div class="mailItem-left">
@@ -12,3 +13,9 @@
     </div>
 </div>
 {{/each}}
+{{else}}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>没有消息哦</p>
+    </div>
+{{/if}}

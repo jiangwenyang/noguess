@@ -1,0 +1,69 @@
+<form class="search-form form" action="/seach-key" method="POST">
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="col-md-4 control-label" for="gender">性别</label>
+            <div class="col-md-8">
+                <select name="gender" id="gender" class="form-control input-sm">
+                        <option value ="null">不限定</option>                                                  
+                        <option value ="男">男</option>
+                        <option value ="女">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="col-md-3 control-label" for="marital">婚姻状况</label>
+            <div class="col-md-9">
+                <select name="marital" id="marital" class="form-control input-sm">
+                        <option value ="null">不限定</option>                   
+                        <option value ="单身">单身</option>
+                        <option value ="恋爱中">恋爱中</option>
+                        <option value ="已婚">已婚</option>   
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="col-md-3 control-label" for="education">教育程度</label>
+            <div class="col-md-9">
+                <select name="education" id="education" class="form-control input-sm">
+                        <option value ="null">不限定</option>                  
+                        <option value ="初中">初中</option>
+                        <option value ="高中">高中</option>                           
+                        <option value ="专科">专科</option>                           
+                        <option value ="本科">本科</option>                           
+                        <option value ="硕士">硕士</option>
+                        <option value ="博士">博士</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="col-md-3 control-label" for="site">所在地</label>
+            <div class="col-md-8">
+                <input type="text" id="site" name="site" placeholder="输入查询城市,不输入则不限定" class="form-control input-sm">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default btn-lg center-block">搜索</button>
+</form>
+{{#if data}}
+{{#each data}}
+    <div class="anySearchresult clearfix userDataItem">
+        <div class="userDataItemLeft clearfix">
+            <img class="avatar-me img-responsive img-rounded" src="{{avatar.path}}" alt="avatar">
+            <a href="/profile/{{_id}}" class="text-mute">{{nickname}}</a>
+        </div>
+        <div class="userDataItemRight">
+            <span class="text-info">猜果数量{{fruit}}</span>
+            {{#if isMe}}
+            {{else}}
+                {{#if hasfollowing}}
+                <button class="disabled btn btn-sm  btn-default">已关注</button> 
+                {{else}}
+                <btn data-user="{{_id}}" class="floowingBtn btn btn-primary">关注他</btn>
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+{{/each}}
+{{/if}}

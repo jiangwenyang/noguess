@@ -1,13 +1,36 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="msgSendBox">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">发送给：<span id="sendToName"></span></h4>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/sendMsg">
+            <input id="sendToUid" type="hidden" value="" name="uid">
+            <div class="form-group">
+                <textarea class="form-control" rows="8" id="sendText" name="sendText"></textarea>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="msgSendBox-Btn" class="btn btn-primary">发送</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="jumbotron">
-    <h1>Q:{{q}}</h1>
+    <h1>Q:{{profileQ}}</h1>
 </div>
 <div class="profilePanel row">
     <div class="profilePanel-left col-md-2">
-        <img src="{{avatar}}" class="profile-avatar-me img-responsive img-rounded" alt="Responsive image">
+        <img src="{{profileAvatar}}" class="profile-avatar-me img-responsive img-rounded" alt="Responsive image">
     </div>
     <div class="profilePanel-right col-md-10">
         <div class="profilePanel-right-header">
-            <span class="profilePanel-right-nickname">{{nickname}}</span>
+            <span class="profilePanel-right-nickname">{{profileNickname}}</span>
+            <span id="profileUid" class="hide">{{profileUid}}</span>
         </div>
         <div class="profilePanel-right-body">
             <div class="profileItem clearfix">
@@ -15,7 +38,7 @@
                     <span>邮箱</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{email}}</span>
+                    <span>{{profileEmail}}</span>
                 </div>
             </div>
             <div class="profileItem clearfix">
@@ -23,7 +46,7 @@
                     <span>生日</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{birthday}}</span>
+                    <span>{{profileBirthday}}</span>
                 </div>
             </div>
             <div class="profileItem clearfix">
@@ -31,7 +54,7 @@
                     <span>性别</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{gender}}</span>
+                    <span>{{profileGender}}</span>
                 </div>
             </div>
             <div class="profileItem clearfix">
@@ -39,7 +62,7 @@
                     <span>居住地</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{site}}</span>
+                    <span>{{profileSite}}</span>
                 </div>
             </div>
             <div class="profileItem clearfix">
@@ -47,7 +70,7 @@
                     <span>身高</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{height}}</span>
+                    <span>{{profileHeight}}</span>
                 </div>
             </div>
             <div class="profileItem clearfix">
@@ -55,7 +78,7 @@
                     <span>教育程度</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{education}}</span>
+                    <span>{{profileEducation}}</span>
                 </div>
             </div>
             <div class="profileItem">
@@ -63,10 +86,19 @@
                     <span>婚姻状态</span>
                 </div>
                 <div class="profiledetailValue">
-                    <span>{{marital}}</span>
+                    <span>{{profileMarital}}</span>
                 </div>
             </div>
-            <button class="profileUpdateBtn btn btn-primary">编辑个人资料</button>
+            {{#if profileIsMe}}
+                <a href="/info" class="profileUpdateBtn btn btn-primary">编辑个人资料</a> 
+            {{else}}
+                {{#if profileHasfollowing}}
+                <btn class="disabled profileUpdateBtn btn btn-default">已关注</btn>
+                {{else}}
+                <btn data-user="{{profileUid}}" class="floowingBtn profileUpdateBtn btn btn-primary">关注他</btn>
+                {{/if}}
+            {{/if}}
+            
         </div>
     </div>
 </div>
@@ -78,37 +110,184 @@
                 <li role="presentation" class="active"><a href="#dynamic" aria-controls="dynamic" role="tab" data-toggle="tab">动态</a></li>
                 <li role="presentation"><a href="#topic" aria-controls="topic" role="tab" data-toggle="tab">话题</a></li>
                 <li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">活动</a></li>
+                {{#if profileIsMe}}
                 <li role="presentation"><a href="#following" aria-controls="following" role="tab" data-toggle="tab">我关注的</a></li>
-                <li role="presentation"><a href="#follwers" aria-controls="follwers" role="tab" data-toggle="tab">关注我的</a></li>
+                <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">关注我的</a></li>
+                {{else}}
+                <li role="presentation"><a href="#following" aria-controls="following" role="tab" data-toggle="tab">他关注的</a></li>
+                <li role="presentation"><a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">关注他的</a></li>
+                {{/if}}
             </ul>
-
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="dynamic">动态</div>
-                <div role="tabpanel" class="tab-pane" id="topic">话题</div>
-                <div role="tabpanel" class="tab-pane" id="activity">活动</div>
-                <div role="tabpanel" class="tab-pane" id="following">我关注的</div>
-                <div role="tabpanel" class="tab-pane" id="follwers">关注我的</div>
-            </div>
+                <div role="tabpanel" class="tab-pane active" id="dynamic">
+                    {{#each dynamic}}
+                    <div class="dynamicItem">
+                        <div class="dynamicBody">
+                            <div class="dynamicBodyContent">{{content}}</div>
+                            <img class="dynamicImg img-responsive" src="{{imgPath}}" alt="imgPath">
+                        </div>
+                        <div class="dynamicFooter clearfix">
+                            <div class="dynamicItem-info pull-left">
+                                <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="topic">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist" id="tabPanelList">
+                            <li role="presentation" class="active"><a href="#topic-publish" aria-controls="dynamic" role="tab" data-toggle="tab">发布的</a></li>
+                            <li role="presentation"><a href="#topic-reply" aria-controls="topic" role="tab" data-toggle="tab">回复的</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="topic-publish">
+                                {{#each publish}}
+                                <div class="topicItem">
+                                    <div class="topicHeader">
+                                        <h3><a href="/topic/{{id}}" class="text-info">{{title}}</a></h3>
+                                    </div>
+                                    <div class="topicBody">
+                                        <div class="topicBodyContent">{{content}}</div>
+                                    </div>
+                                    <div class="topicFooter clearfix">
+                                        <div class="topicItem-info pull-left">
+                                            <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
+                                        </div>
+                                        <div class="topicItem-info pull-left">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span><span>{{num followers}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div role="tabpanel" class="tab-pane active" id="topic-reply">
+                                {{#each reply}}
+                                <div class="topicItem">
+                                    <div class="topicHeader">
+                                        <h3><a href="/topic/{{id}}" class="text-info">{{title}}</a></h3>
+                                    </div>
+                                    <div class="topicBody">
+                                        <div class="topicBodyContent">{{content}}</div>
+                                    </div>
+                                    <div class="topicFooter clearfix">
+                                        <div class="topicItem-info pull-left">
+                                            <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
+                                        </div>
+                                        <div class="topicItem-info pull-left">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span><span>{{num followers}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="activity">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist" id="tabPanelList">
+                            <li role="presentation" class="active"><a href="#activity-organize" aria-controls="activity-organize" role="tab" data-toggle="tab">发起的</a></li>
+                            <li role="presentation"><a href="#activity-join" aria-controls="activity-join" role="tab" data-toggle="tab">参与的</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="activity-organize">
+                                {{#each organize}}
+                                <div class="activityitem">
+                                    <div class="activityHeader clearfix">
+                                        <h3 class="pull-left">{{title}}</h3>
+                                    </div>
+                                    <div class="activityBody">
+                                        <div class="activityBodyContent">{{content}} </div>
+                                    </div>
+                                    <div class="activityFooter clearfix">
+                                        <div class="activityItem-info pull-left">
+                                            <span class="glyphicon glyphicon glyphicon-calendar"></span><span>{{formatDate startTime}}到{{formatDate stopTime}}</span>
+                                        </div>
+                                        <div class="activityItem-info pull-left">
+                                            <span class="glyphicon glyphicon-globe"></span><span>{{place}}</span>
+                                        </div>
+                                        <div class="activityItem-info pull-left">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span><span>{{num followers}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div role="tabpanel" class="tab-pane active" id="activity-join">
+                                {{#each join}}
+                                <div class="activityitem">
+                                    <div class="activityHeader clearfix">
+                                        <h3 class="pull-left">{{title}}</h3>
+                                    </div>
+                                    <div class="activityBody">
+                                        <div class="activityBodyContent">{{content}} </div>
+                                    </div>
+                                    <div class="activityFooter clearfix">
+                                        <div class="activityItem-info pull-left">
+                                            <span class="glyphicon glyphicon glyphicon-calendar"></span><span>{{formatDate startTime}}到{{formatDate stopTime}}</span>
+                                        </div>
+                                        <div class="activityItem-info pull-left">
+                                            <span class="glyphicon glyphicon-globe"></span><span>{{place}}</span>
+                                        </div>
+                                        <div class="activityItem-info pull-left">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span><span>{{num followers}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="following">
+                    {{#each following}}
+                    <div class="anySearchresult clearfix userDataItem">
+                        <div class="userDataItemLeft clearfix">
+                            <img class="avatar-me img-responsive img-rounded" src="{{avatar.path}}" alt="avatar">
+                            <a href="/profile/{{_id}}" class="text-mute">{{nickname}}</a>
+                        </div>
+                        <div class="userDataItemRight">
+                            <span class="text-info">猜果数量{{fruit}}</span>
+                            <button data-user="{{_id}}" data-toggle="modal" data-target="#msgSendBox" class="msgSendBtn btn btn-sm btn-default">私信 <span class="glyphicon glyphicon-envelope"></span></button> 
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="followers">
+                    {{#each followers}}
+                    <div class="anySearchresult clearfix userDataItem">
+                        <div class="userDataItemLeft clearfix">
+                            <img class="avatar-me img-responsive img-rounded" src="{{avatar.path}}" alt="avatar">
+                            <a href="/profile/{{_id}}" class="text-mute">{{nickname}}</a>
+                        </div>
+                        <div class="userDataItemRight">
+                            <span class="text-info">猜果数量{{fruit}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
 
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-body">
-                <p>我的猜果</p>
-                <p>50个</p>
+                <p>猜果</p>
+                <p>{{profileFruit}}个</p>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
                     <p>关注了</p>
-                    <span>50</span>
+                    <span>{{followingNum}}</span>
                 </div>
                 <div class="col-md-6">
                     <p>关注者</p>
-                    <span>50</span>
+                    <span>{{followersNum}}</span>
                 </div>
             </div>
         </div>

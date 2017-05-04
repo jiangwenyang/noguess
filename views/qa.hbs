@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1 class="text-center text-info">无猜</h1>
-            <a href="/info" class="pull-right btn btn-sm btn-default">晚点填</a>
+            <a href="/" class="pull-right btn btn-sm btn-default">晚点填</a>
             <p class="description text-center text-info">这里有一群两小无猜的小伙伴！快来加入我们吧</p>
             {{#if flash}}
             <div class="alert alert-warning alert-dismissible" role="alert">
@@ -10,12 +10,16 @@
                 <p>{{flash.msg}}</p>
             </div>
             {{/if}}
-            <form method="POST" action="/avatarSetting" enctype="multipart/form-data">
+            <form method="POST" action="/qa">
                 <div class="form-group">
-                    <label for="avatar">选择文件</label>
-                    <input type="file" class="form-control" name="avatar" id="avatar" placeholder="选择你要上传的头像">
+                    <label for="q">写下一个问题吧？</label>
+                    <input type="text" class="form-control" name="q" id="q" placeholder="床前明月光">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">设置头像</button>
+                <div class="form-group">
+                    <label for="a">告诉我们这个问题的答案，好不好？</label>
+                    <input type="text" class="form-control" name="a" id="a" placeholder="疑是地上霜">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Q&amp;A</button>
             </form>
         </div>
     </div>

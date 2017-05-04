@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="module_header">全部活动</h2>
+        {{#each data}}
+        <div class="activityitem">
+            <div class="activityHeader clearfix">
+                <h3 class="pull-left">{{title}}</h3>
+                <div class="pull-right">
+                    {{#if isFollowed}}
+                    <button class="disabled btn btn-sm  btn-default">已参与</button> 
+                    {{else}}
+                    <button data-activity="{{_id}}"  class="joinBtn btn btn-sm btn-primary">参与</button> 
+                    {{/if}}
+                </div>
+            </div>
+            <div class="activityBody">
+                <div class="activityBodyContent">{{content}} </div>
+            </div>
+            <div class="activityFooter clearfix">
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+                </div>
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon glyphicon-calendar"></span><span>{{formatDate startTime}}到{{formatDate stopTime}}</span>
+                </div>
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon-globe"></span><span>{{place}}</span>
+                </div>
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon-thumbs-up"></span><span>{{followersNum}}</span>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="col-md-6">
+        <form action="/publishActivity" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="activityStartTime" class="col-sm-2 control-label">活动时间:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="activityStartTime" name="activityStartTime" placeholder="开始时间">
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="activityStopTime" name="activityStopTime" placeholder="结束时间">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="activityPlace" class="col-sm-2 control-label">活动地点:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="activityPlace" name="activityPlace" placeholder="告诉你的小伙伴活动地点哦">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="activityTitle" class="col-sm-2 control-label">活动主题:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="activityTitle" name="activityTitle" placeholder="嗯，主题什么的最难想了">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="activityText" class="col-sm-2 control-label">活动内容:</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="6" id="activityText" name="activityText" placeholder="我们的活动内容是。。。。没有内容"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">发布活动</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

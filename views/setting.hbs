@@ -1,0 +1,71 @@
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="settingTabs" role="tablist">
+        <li role="presentation" class="active"><a href="#profileDetail" aria-controls="profileDetail" role="tab" data-toggle="tab">基本资料</a></li>
+        <li role="presentation"><a href="#profileAccount" aria-controls="profileAccount" role="profileAccount" data-toggle="tab">账号和密码</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="profileDetail">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span>昵称:</span>
+                            </div>
+                            <div class="col-md-1">
+                                <span class="nickname">{{nickname}}</span>
+                            </div>
+                            <div class="col-md-1">
+                                <span id="editNicknameBtn" class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form id="editNickNameForm" action="editNickname" method="POST">
+                                <input type="text" id="nickname" name="nickname">
+                                <button type="submit" class="">修改</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profileAccount">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="editPassword" method="POST" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="oldPassword" class="col-sm-2 control-label">原密码</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" name="oldPassword" id="oldPassword" placeholder="请输入原密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword" class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="请输入新密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#if flash}}
+    <div class="col-md-6 alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>{{flash.msg}}</p>
+    </div>
+    {{/if}}
+
+</div>

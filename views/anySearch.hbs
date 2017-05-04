@@ -1,0 +1,86 @@
+<div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="tabPanelList">
+        <li role="presentation" class="active"><a href="#resultUser" aria-controls="resultUser" role="tab" data-toggle="tab">用户</a></li>
+        <li role="presentation"><a href="#resultTopic" aria-controls="resultTopic" role="tab" data-toggle="tab">话题</a></li>
+        <li role="presentation"><a href="#resultActivity" aria-controls="resultActivity" role="tab" data-toggle="tab">活动</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="resultUser">
+            {{#if flash}}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>{{flash.msg}}</p>
+            </div>
+            {{/if}} {{#if allData.userData}} {{#each allData.userData}}
+            <div class="anySearchresult clearfix userDataItem">
+                <div class="userDataItemLeft clearfix">
+                    <img class="avatar-me img-responsive img-rounded" src="{{avatar.path}}" alt="avatar">
+                    <a href="/profile/{{_id}}" class="text-mute">{{nickname}}</a>
+                </div>
+                <div class="userDataItemRight">
+                    <span class="text-info">猜果数量{{fruit}}</span>
+                </div>
+            </div>
+            {{/each}} {{else}}
+            <p class="bg-info">没有查询到相关用户</p>
+            {{/if}}
+        </div>
+        <div role="tabpanel" class="tab-pane" id="resultTopic">
+            {{#if allData.topicData}} {{#each allData.topicData}}
+            <div class="topicItem">
+                <div class="topicHeader">
+                    <h3><a href="/topic/{{id}}" class="text-info">{{title}}</a></h3>
+                </div>
+                <div class="topicBody">
+                    <div class="topicBodyContent">{{content}}</div>
+                </div>
+                <div class="topicFooter clearfix">
+                    <div class="topicItem-info pull-left">
+                        <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
+                    </div>
+                    <div class="topicItem-info pull-left">
+                        <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}} {{else}}
+            <p class="bg-info">没有查询到相关主题</p>
+            {{/if}}
+        </div>
+        <div role="tabpanel" class="tab-pane" id="resultActivity">
+            {{#if allData.activityData}} {{#each allData.activityData}}
+            <div class="activityitem">
+                <div class="activityHeader clearfix">
+                    <h3 class="pull-left">{{title}}</h3>
+                    <div class="pull-right">
+                        {{#if isFollowed}}
+                        <button class="disabled btn btn-sm  btn-default">已参与</button> {{else}}
+                        <button data-activity="{{_id}}" class="joinBtn btn btn-sm btn-primary">参与</button> {{/if}}
+                    </div>
+                </div>
+                <div class="activityBody">
+                    <div class="activityBodyContent">{{content}} </div>
+                </div>
+                <div class="activityFooter clearfix">
+                    <div class="activityItem-info pull-left">
+                        <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+                    </div>
+                    <div class="activityItem-info pull-left">
+                        <span class="glyphicon glyphicon glyphicon-calendar"></span><span>{{formatDate startTime}}到{{formatDate stopTime}}</span>
+                    </div>
+                    <div class="activityItem-info pull-left">
+                        <span class="glyphicon glyphicon-globe"></span><span>{{place}}</span>
+                    </div>
+                    <div class="activityItem-info pull-left">
+                        <span class="glyphicon glyphicon-thumbs-up"></span><span>{{followersNum}}</span>
+                    </div>
+                </div>
+            </div>
+            {{/each}} {{else}}
+            <p class="bg-info">没有查询到相关活动</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

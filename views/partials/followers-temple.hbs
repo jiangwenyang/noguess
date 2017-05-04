@@ -1,0 +1,15 @@
+<script id="followers-template" type="text/x-handlebars-template">
+    <ul>
+        \{{#each this}}
+        <div class="anySearchresult clearfix userDataItem">
+                <div class="userDataItemLeft clearfix">
+                    <img class="avatar-me img-responsive img-rounded" src="\{{avatar.path}}" alt="avatar">
+                    <a href="/profile/\{{_id}}" class="text-mute">\{{nickname}}</a>
+                </div>
+                <div class="userDataItemRight">
+                    <span class="text-info">猜果数量\{{fruit}}</span>
+                </div>
+        </div>
+        \{{/each}}
+    </ul>
+</script>

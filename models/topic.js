@@ -6,7 +6,8 @@ var topicSchema = new Schema({
         type: ObjectId,
         ref: 'User'
     },
-    time: Date,
+    timeStamp: Date,
+    title: String,
     content: String,
     followers: [{
         from: {

@@ -1,0 +1,25 @@
+<script id="activity-template" type="text/x-handlebars-template">
+    <ul>
+        \{{#each this}}
+        <div class="activityitem">
+            <div class="activityHeader clearfix">
+                <h3 class="pull-left">\{{title}}</h3>
+            </div>
+            <div class="activityBody">
+                <div class="activityBodyContent">\{{content}} </div>
+            </div>
+            <div class="activityFooter clearfix">
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon glyphicon-calendar"></span><span>\{{startTimeFormat}}到\{{stopTimeFormat}}</span>
+                </div>
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon-globe"></span><span>\{{place}}</span>
+                </div>
+                <div class="activityItem-info pull-left">
+                    <span class="glyphicon glyphicon-thumbs-up"></span><span>\{{followersNum}}</span>
+                </div>
+            </div>
+        </div>
+        \{{/each}}
+    </ul>
+</script>

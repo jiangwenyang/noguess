@@ -1,0 +1,41 @@
+<div class="topicItem">
+    <div class="topicHeader">
+        <h3 class="text-info">{{title}}</h3>
+    </div>
+    <div class="topicBody">
+        <div class="topicBodyContent">{{content}}</div>
+    </div>
+    <div class="topicFooter clearfix">
+        <div class="topicItem-info pull-left">
+            <span class="glyphicon glyphicon-time"></span><span>{{timeStamp}}</span>
+        </div>
+        <div class="topicItem-info pull-left">
+            <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+        </div>
+    </div>
+</div>
+<div class="repeatList">
+    <h3>回复</h3>
+    {{#each followers}}
+    <div class="repeatItem">
+        <p class="repeatContent">
+            {{reply}}
+        </p>
+        <div class="repeatFooter clearfix">
+            <div class="topicItem-info pull-left">
+                <span class="glyphicon glyphicon-time"></span><span>{{time}}</span>
+            </div>
+            <div class="topicItem-info pull-left">
+                <span class="glyphicon glyphicon-user"></span><a href="/profile/{{from._id}}">{{from.nickname}}</a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+<div class="repeatBox">
+    <h3>发表回复</h3>
+    <form action="/repeat/{{_id}}" method="POST">
+        <textarea class="form-control" rows="6" id="repeatText" name="repeatText" placeholder="回复内容"></textarea>
+        <button type="submit" class="btn btn-default">回复</button>
+    </form>
+</div>

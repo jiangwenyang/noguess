@@ -1,0 +1,19 @@
+<script id="topic-template" type="text/x-handlebars-template">
+    <ul>
+        \{{#each this}}
+        <div class="topicItem">
+            <div class="topicHeader">
+                <h3><a href="/topic/{{id}}" class="text-info">\{{title}}</a></h3>
+            </div>
+            <div class="topicBody">
+                <div class="topicBodyContent">\{{content}}</div>
+            </div>
+            <div class="topicFooter clearfix">
+                <div class="topicItem-info pull-left">
+                    <span class="glyphicon glyphicon-time"></span><span>\{{timeStamp}}</span>
+                </div>
+            </div>
+        </div>
+        \{{/each}}
+    </ul>
+</script>

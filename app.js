@@ -4,9 +4,19 @@ var app = express();
 var credentials = require('./credentials.js');
 // 配置handlebars模板引擎
 var exphbs = require('express-handlebars');
+// 配置moment
+var moment = require('moment');
 var hbs = exphbs.create({
     defaultLayout: 'main',
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: {
+        formatDate: function (date) {
+            return moment(date).format('YYYY-DD-MM H:MM');
+        },
+        num:function(arr){
+            return arr.length;
+        }
+    }
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
@@ -42,6 +52,10 @@ var sessionStore = new MongoSessionStore({
 // 托管静态文件
 app.use(express.static('public'));
 app.use(express.static('uploads'));
+app.use('/profile', express.static('public'));
+app.use('/profile', express.static('uploads'));
+app.use('/topic', express.static('public'));
+app.use('/topic', express.static('uploads'));
 // 配置body-parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -84,8 +98,6 @@ app.use(function (req, res, next) {
         }
     }
 })
-// 访问用户模型
-var User = require('./models/users.js');
 // 配置控制台色彩输出
 var colors = require('colors');
 // 设置默认端口号
@@ -105,7 +117,7 @@ app.use(function (err, req, res, next) {
     res.status(500);
     res.send('500-Server Error');
 });
-
+// 启动监听默认端口
 app.listen(app.get('port'), function () {
     console.log(('Express started in ' + app.get('env') +
         ' mode on port ' + app.get('port') +

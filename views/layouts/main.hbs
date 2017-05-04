@@ -17,7 +17,7 @@
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default mainheader">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -27,27 +27,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">无猜</a>
+                    <a class="navbar-brand" href="/">无猜</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <form class="navbar-form navbar-left">
+                    <form action="/anySearch" method="POST" class="navbar-form navbar-left">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="搜索你感兴趣的内容">
+                            <input type="text" id="anyq" name="anyq" class="form-control" placeholder="搜索你感兴趣的内容">
                         </div>
                         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </form>
                     <ul class="nav navbar-nav">
-                        <li><a href="#">话题</a></li>
-                        <li><a href="#">活动</a></li>
+                        <li><a href="/allTopic">话题</a></li>
+                        <li><a href="/allActivity">活动</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">快速搜索<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">条件搜索</a></li>
+                                <li><a href="/search-key">条件搜索</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">随机速配</a></li>
-                                <li><a href="#">同城搜索</a></li>
-                                <li><a href="#">星座速配</a></li>
+                                <li><a href="/random">随机速配</a></li>
+                                <li><a href="/oneSite">同城搜索</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -56,9 +55,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{nickname}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">个人主页</a></li>
-                                <li><a href="#">私信</a></li>
-                                <li><a href="#">设置</a></li>
+                                <li><a href="/profile/{{uid}}">个人主页</a></li>
+                                <li><a href="/mailbox">私信</a></li>
+                                <li><a href="/setting">设置</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/logout">退出</a></li>
                             </ul>
@@ -69,14 +68,37 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+        <div class="row">
+            {{#if flash}}
+            <div class="col-md-6 col-md-offset-2 alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>{{flash.msg}}</p>
+            </div>
+            {{/if}}
+        </div>
         {{{body}}}
     </div>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/mainAjax.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="js/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="js/all.js"></script>
     <script type="text/javascript">
         $youziku.load("h1,.navbar-brand", "17e9903dd1fe49b594e29a1095c4e7df", "jin_mei_xiaottmeigz");
         $youziku.draw();
+        $('#activityStartTime').datetimepicker({
+            minView: 2,
+            format: 'yyyy-mm-dd',
+            language: "zh-CN",
+            autoclose: true
+        });
+        $('#activityStopTime').datetimepicker({
+            minView: 2,
+            format: 'yyyy-mm-dd',
+            language: "zh-CN",
+            autoclose: true
+        });
     </script>
 </body>
 

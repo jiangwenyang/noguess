@@ -1,0 +1,26 @@
+{{#if data}}
+{{#each data}}
+    <div class="anySearchresult clearfix userDataItem">
+        <div class="userDataItemLeft clearfix">
+            <img class="avatar-me img-responsive img-rounded" src="{{avatar.path}}" alt="avatar">
+            <a href="/profile/{{_id}}" class="text-mute">{{nickname}}</a>
+        </div>
+        <div class="userDataItemRight">
+            <span class="text-info">猜果数量{{fruit}}</span> 
+            {{#if isMe}}
+            {{else}}
+                {{#if hasfollowing}}
+                <button class="disabled btn btn-sm  btn-default">已关注</button> 
+                {{else}}
+                <btn data-user="{{_id}}" class="floowingBtn btn btn-primary">关注他</btn>
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+{{/each}}
+{{else if flash.search}}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>{{flash.msg}}</p>
+    </div>
+{{/if}}

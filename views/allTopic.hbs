@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="module_header">全部话题</h2>
+        {{#each data}}
+        <div class="topicItem">
+            <div class="topicHeader">
+                <h3><a href="/topic/{{id}}" class="text-info">{{title}}</a></h3>
+            </div>
+            <div class="topicBody">
+                <div class="topicBodyContent">{{content}}</div>
+            </div>
+            <div class="topicFooter clearfix">
+                <div class="topicItem-info pull-left">
+                    <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
+                </div>
+                <div class="topicItem-info pull-left">
+                    <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="col-md-6">
+        <form action="/publishTopic" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="topicTitle" class="col-sm-2 control-label">话题标题:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="topicTitle" name="topicTitle" placeholder="嗯，让我们来聊聊***吧">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="topicText" class="col-sm-2 control-label">话题内容:</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="6" id="topicText" name="topicText" placeholder="***是一个很有意思的话题"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">发布话题</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

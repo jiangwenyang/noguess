@@ -19,7 +19,7 @@ var userSchema = new Schema({
     gender: {
         type: String,
         required: true,
-        default: 'undefined'
+        default: '性别什么的是个秘密哦'
     },
     birthday: {
         year: {
@@ -41,7 +41,7 @@ var userSchema = new Schema({
     site: {
         type: String,
         required: true,
-        default: 'undefined'
+        default: '火星上'
     },
     height: {
         type: Number,
@@ -51,23 +51,23 @@ var userSchema = new Schema({
     education: {
         type: String,
         required: true,
-        default: 'undefined'
+        default: '学无止境'
     },
     marital: {
         type: String,
         required: true,
-        default: 'undefined'
+        default: '不告诉你'
     },
     qa: {
         q: {
             type: String,
             required: true,
-            default: 'undefined'
+            default: '床前明月光'
         },
         a: {
             type: String,
             required: true,
-            default: 'undefined'
+            default: '疑是地上霜'
         }
     },
     avatar: {
@@ -79,22 +79,31 @@ var userSchema = new Schema({
         path: {
             type: String,
             required: true,
-            default: 'baidu.com'
+            default: 'avatar/avatar.gif'
         },
     },
     album: [{
-        time: Date,
+        timeStamp: Date,
         path: String
     }],
-    followers: [ObjectId],
-    following: [ObjectId],
+    followers: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
+    following: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
     dynamic: [{
-        time: Date,
+        timeStamp: Date,
         content: String,
         imgPath: String
     }],
     mailbox: [{
-        from: ObjectId,
+        from: {
+            type: ObjectId,
+            ref: 'User'
+        },
         text: String
     }],
     activity: {

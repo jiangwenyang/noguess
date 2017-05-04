@@ -1,0 +1,14 @@
+{{#each data.mailbox}}
+<div class="row mailItem clearfix">
+    <div class="mailItem-left">
+        <img src="{{from.avatar.path}}" class="avatar-me img-responsive img-rounded" alt="Responsive image">
+        <a href="/profile/{{from._id}}">{{from.nickname}}</a>
+    </div>
+    <div class="mailItem-right">
+        <div class="arrow"></div>
+        <p>
+            {{text}}
+        </p>
+    </div>
+</div>
+{{/each}}

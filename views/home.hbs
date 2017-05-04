@@ -1,77 +1,89 @@
-<h1>无猜</h1>
-<p>{{email}}</p>
-<p>{{uid}}</p>
-<p>{{nickname}}</p>
-<p>{{avatar}}</p>
-<form action="/dynamic" method="post" class="form-inline" enctype="multipart/form-data">
+<form action="/publishDynamic" method="post" class="form-horizontal" enctype="multipart/form-data">
     <div class="form-group">
-        <textarea class="form-control" rows="3" id="dynamicText" name="dynamicText"></textarea>
+        <label for="dynamicText" class="col-sm-2 control-label">动态内容:</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" rows="6" id="dynamicText" name="dynamicText"></textarea>
+        </div>
     </div>
     <div class="form-group">
-        <input type="file" name="dynamicImg" id="dynamicImg" class="form-control" placeholder="Text input">
+        <label for="dynamicImg" class="col-sm-2 control-label">插入图片:</label>
+        <div class="col-sm-6">
+            <input type="file" name="dynamicImg" id="dynamicImg" class="form-control" placeholder="选择图片">
+        </div>
     </div>
-    <button type="submit" class="btn btn-default">发布新动态</button>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">发布动态</button>
+        </div>
+    </div>
 </form>
-<form action="/topic" method="post" class="form-inline">
-    <div class="form-group">
-        <textarea class="form-control" rows="3" id="topicText" name="topicText"></textarea>
+<h3>最新动态</h3>
+{{#each dynamicNew.following}} 
+    {{#if dynamic}}
+    <div class="dynamicItem">
+        <div class="dynamicBody">
+            <img class="dynamicImg img-responsive" src="{{dynamic.[0].imgPath}}" alt="imgPath">
+            <div class="dynamicBodyContent">{{dynamic.[0].content}}</div>
+        </div>
+        <div class="dynamicFooter clearfix">
+            <div class="dynamicItem-info pull-left">
+                    <span class="glyphicon glyphicon-user"></span><a href="/profile/{{_id}}">{{nickname}}</a>
+            </div>
+            <div class="dynamicItem-info pull-left">
+                <span class="glyphicon glyphicon-time"></span><span>{{formatDate dynamic.[0].timeStamp}}</span>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-default">发布新话题</button>
-</form>
-<h2>最新动态-好友的最新的一条动态</h2>
-<ul>
-    <li>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-    </li>
-    <li>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-    </li>
-</ul>
-<h2>热门活动-根据参加人数</h2>
-<ul>
-    <li>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-    </li>
-    <li>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-    </li>
-</ul>
-<h2>热门话题-评论人数</h2>
-<ul>
-    <li>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-    </li>
-    <li>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-        <p>adasdadasdasdadadad</p>
-    </li>
-</ul>
+    {{/if}} 
+{{/each}}
+<h3>热门话题</h3>
+{{#each TopicHot}}
+        <div class="topicItem">
+            <div class="topicHeader">
+                <h3><a href="/topic/{{id}}" class="text-info">{{title}}</a></h3>
+            </div>
+            <div class="topicBody">
+                <div class="topicBodyContent">{{content}}</div>
+            </div>
+            <div class="topicFooter clearfix">
+                <div class="topicItem-info pull-left">
+                    <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+                </div>
+                <div class="topicItem-info pull-left">
+                    <span class="glyphicon glyphicon-time"></span><span>{{formatDate timeStamp}}</span>
+                </div>
+            </div>
+        </div>
+{{/each}}
+<h3>热门活动</h3>
+{{#each activityHot}}
+    <div class="activityitem">
+        <div class="activityHeader clearfix">
+            <h3 class="pull-left">{{title}}</h3>
+            <div class="pull-right">
+                {{#if isFollowed}}
+                <button class="disabled btn btn-sm  btn-default">已参与</button> 
+                {{else}}
+                <button data-activity="{{_id}}"  class="joinBtn btn btn-sm btn-primary">参与</button> 
+                {{/if}}
+            </div>
+        </div>
+        <div class="activityBody">
+            <div class="activityBodyContent">{{content}} </div>
+        </div>
+        <div class="activityFooter clearfix">
+            <div class="activityItem-info pull-left">
+                <span class="glyphicon glyphicon-user"></span><a href="/profile/{{leader._id}}">{{leader.nickname}}</a>
+            </div>
+            <div class="activityItem-info pull-left">
+                <span class="glyphicon glyphicon glyphicon-calendar"></span><span>{{formatDate startTime}}到{{formatDate stopTime}}</span>
+            </div>
+            <div class="activityItem-info pull-left">
+                <span class="glyphicon glyphicon-globe"></span><span>{{place}}</span>
+            </div>
+            <div class="activityItem-info pull-left">
+                <span class="glyphicon glyphicon-thumbs-up"></span><span>{{followersNum}}</span>
+            </div>
+        </div>
+    </div>
+{{/each}}

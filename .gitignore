@@ -38,3 +38,6 @@ jspm_packages
 
 # cookie Secret
 credentials.js
+
+#相册文件
+uploads

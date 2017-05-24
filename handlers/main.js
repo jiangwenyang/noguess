@@ -1,6 +1,9 @@
+// 引入数据库模型
 var User = require('../models/users.js');
 var Topic = require('../models/topic.js');
 var Activity = require('../models/activity.js');
+// 引入密码加密
+var sha1=require('sha1');
 // 主页渲染
 exports.homeRender = function (req, res) {
     var allData = {};
@@ -52,7 +55,7 @@ exports.regHandler = function (req, res) {
     // 成功就跳转到资料填写页面
     var user = new User({
         email: req.body.email,
-        password: req.body.password,
+        password: sha1(req.body.password),//使用sha1进行密码加密
         nickname: req.body.nickname,
     })
     user.save(function (err, doc) {
@@ -181,8 +184,8 @@ exports.settingNicknameHandler = function (req, res) {
 };
 // 处理密码修改
 exports.editPasswordHandler = function (req, res) {
-    var oldPassword = req.body.oldPassword,
-        newPassword = req.body.newPassword;
+    var oldPassword = sha1(req.body.oldPassword),
+        newPassword = sha1(req.body.newPassword);
     User.findOneAndUpdate({
         _id: req.session.uid,
         password: oldPassword
@@ -224,7 +227,7 @@ exports.loginHandler = function (req, res) {
                 msg: '账号不存在，请重新输入！'
             }
             res.redirect('/login');
-        } else if (doc.password == req.body.password) {
+        } else if (doc.password == sha1(req.body.password)) {
             req.session.uid = doc.id;
             req.session.email = doc.email;
             req.session.nickname = doc.nickname;
